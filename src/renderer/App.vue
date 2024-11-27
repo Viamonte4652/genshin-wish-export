@@ -1,5 +1,6 @@
 <template>
   <div v-if="ui" class="relative">
+    <TitleBar />
     <div class="flex justify-between">
       <div>
         <el-button type="primary" :icon="state.status === 'init' ? 'milk-tea': 'refresh-right'" class="focus:outline-none" :disabled="!allowClick()" plain @click="fetchData()" :loading="state.status === 'loading'">{{state.status === 'init' ? ui.button.load: ui.button.update}}</el-button>
@@ -37,7 +38,7 @@
     <div v-if="detail" class="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4">
       <div class="mb-4" v-for="(item, i) of detail" :key="i">
         <div :class="{hidden: state.config.hideNovice && item[0] === '100'}">
-          <p class="text-center text-gray-600 my-2">{{typeMap.get(item[0])}}</p>
+          <p class="text-center text-white my-2">{{typeMap.get(item[0])}}</p>
           <pie-chart :data="item" :i18n="state.i18n" :typeMap="typeMap"></pie-chart>
           <gacha-detail :i18n="state.i18n" :data="item" :typeMap="typeMap"></gacha-detail>
         </div>
@@ -46,7 +47,7 @@
     <Setting v-show="state.showSetting" :i18n="state.i18n" @changeLang="getI18nData()" @close="showSetting(false)"
              @dataUpdated="readData(true)"></Setting>
     <el-dialog :title="ui.urlDialog.title" v-model="state.showUrlDlg" width="90%" custom-class="max-w-md">
-      <p class="mb-4 text-gray-500">{{ui.urlDialog.hint}}</p>
+      <p class="mb-4 text-gray-300">{{ui.urlDialog.hint}}</p>
       <el-input  type="textarea" :autosize="{minRows: 4, maxRows: 6}" :placeholder="ui.urlDialog.placeholder" v-model="state.urlInput" spellcheck="false"></el-input>
       <template #footer>
         <span class="dialog-footer">
@@ -58,7 +59,7 @@
 
     <el-dialog :title="ui.button.solution" v-model="state.showCacheCleanDlg" width="90%" custom-class="max-w-md">
       <el-button plain icon="folder" type="primary" @click="openCacheFolder">{{ui.button.cacheFolder}}</el-button>
-      <p class="my-4 leading-2 text-gray-600 text-sm whitespace-pre-line">{{ui.extra.cacheClean}}</p>
+      <p class="my-4 leading-2 text-gray-300 text-sm whitespace-pre-line">{{ui.extra.cacheClean}}</p>
       <p class="my-2 text-gray-400 text-xs">{{ui.extra.findCacheFolder}}</p>
       <template #footer>
         <div class="dialog-footer text-center">
@@ -76,6 +77,7 @@ import { reactive, computed, watch, onMounted } from 'vue'
 import PieChart from './components/PieChart.vue'
 import GachaDetail from './components/GachaDetail.vue'
 import Setting from './components/Setting.vue'
+import TitleBar from './components/TitleBar.vue'
 import gachaDetail from './gachaDetail'
 import { version } from '../../package.json'
 import gachaType from '../gachaType.json'

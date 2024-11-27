@@ -17,6 +17,25 @@ function createWindow() {
   if (isDev) {
     win.webContents.openDevTools({ mode: 'undocked', activate: true })
   }
+
+  // Window control handlers
+  ipcMain.on('window-minimize', () => {
+    win.minimize()
+  })
+
+  ipcMain.on('window-maximize', () => {
+    if (win.isMaximized()) {
+      win.unmaximize()
+      win.webContents.send('window-unmaximized')
+    } else {
+      win.maximize()
+      win.webContents.send('window-maximized')
+    }
+  })
+
+  ipcMain.on('window-close', () => {
+    win.close()
+  })
 }
 
 const isFirstInstance = app.requestSingleInstanceLock()
@@ -68,4 +87,3 @@ if (!isFirstInstance) {
     }
   })
 }
-

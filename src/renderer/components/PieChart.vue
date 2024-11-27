@@ -81,12 +81,16 @@ const updateChart = throttle(() => {
       padding: 4,
       textStyle: {
         fontSize: 12,
+        color: '#ffffff'
       },
     },
     legend: {
       top: "2%",
       left: "center",
       selected: result[2],
+      textStyle: {
+        color: '#ffffff'
+      }
     },
     selectedMode: "single",
     color: result[1],
@@ -97,13 +101,16 @@ const updateChart = throttle(() => {
         top: 50,
         startAngle: 70,
         radius: ["0%", "90%"],
-        // avoidLabelOverlap: false,
+        label: {
+          color: '#ffffff',
+          overflow: "break"
+        },
         labelLine: {
           length: 0,
           length2: 10,
-        },
-        label: {
-          overflow: "break",
+          lineStyle: {
+            color: '#ffffff'
+          }
         },
         data: result[0],
       },

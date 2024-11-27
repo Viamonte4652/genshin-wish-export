@@ -5,12 +5,91 @@
 @layer base {
   :root {
     --el-font-size-base: 12px !important;
+    --el-bg-color: #1f1f1f !important;
+    --el-bg-color-overlay: #2d2d2d !important;
+    --el-text-color-primary: #ffffff !important;
+    --el-text-color-regular: #e0e0e0 !important;
+    --el-border-color: #3f3f3f !important;
+    --el-border-color-light: #4a4a4a !important;
+    --el-fill-color-blank: #1f1f1f !important;
+    --el-fill-color: #2d2d2d !important;
+    --el-mask-color: rgba(0, 0, 0, 0.7) !important;
   }
-  body::-webkit-scrollbar {
+
+  html, body {
+    @apply bg-gray-900 text-white;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .titlebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    -webkit-app-region: drag;
+  }
+
+  .titlebar button {
+    -webkit-app-region: no-drag;
+  }
+
+  .relative {
+    padding-top: 32px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .settings-container {
+    overflow-y: auto;
+  }
+
+  .settings-container::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
-  body::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-gray-300;
+
+  .settings-container::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-gray-600;
+  }
+
+  .el-button--default {
+    --el-button-bg-color: #2d2d2d !important;
+    --el-button-border-color: #4a4a4a !important;
+    --el-button-hover-bg-color: #3d3d3d !important;
+    --el-button-hover-border-color: #5a5a5a !important;
+  }
+
+  .el-select-dropdown {
+    background-color: #2d2d2d !important;
+  }
+
+  .el-select-dropdown__item:hover {
+    background-color: #3d3d3d !important;
+  }
+
+  .el-dialog {
+    background-color: #1f1f1f !important;
+  }
+
+  .el-form {
+    background-color: transparent !important;
+  }
+
+  .el-form-item {
+    background-color: transparent !important;
+  }
+
+  .el-form-item__label {
+    color: #e0e0e0 !important;
   }
 }

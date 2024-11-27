@@ -19,23 +19,17 @@ const userPath = app.getPath('userData')
 
 let win = null
 const initWindow = () => {
-  let mainWindowState = windowStateKeeper({
-    defaultWidth: 888,
-    defaultHeight: 550
-  })
-  win = new BrowserWindow({
-    x: mainWindowState.x,
-    y: mainWindowState.y,
-    width: mainWindowState.width,
-    height: mainWindowState.height,
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    frame: false,
+    backgroundColor: '#1f1f1f',
     webPreferences: {
-      contextIsolation:false,
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false,
+      webSecurity: false
     }
   })
-  const saveState = debounce(mainWindowState.saveState, 500)
-  win.on('resize', () => saveState(win))
-  win.on('move', () => saveState(win))
   return win
 }
 
@@ -211,7 +205,7 @@ const decipherAes = (encrypted) => {
   return decrypted
 }
 
-const  interfaces = require('os').networkInterfaces()
+const interfaces = require('os').networkInterfaces()
 const localIp = () => {
   for (var devName in interfaces) {
     var iface = interfaces[devName]
@@ -228,7 +222,7 @@ const localIp = () => {
 async function getCacheText(gamePath) {
   const results = await glob(path.join(gamePath, '/webCaches{/,/*/}Cache/Cache_Data/data_2'), {
     stat: true,
-		withFileTypes: true,
+    withFileTypes: true,
     nodir: true,
     windowsPathsNoEscape: true
   })
